@@ -77,4 +77,12 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 	public getVideoUrl() {
 		return this.DomSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + (this.step as YoutubeTourStep).video + '?rel=0');
 	}
+
+	public onKey($event: KeyboardEvent) {
+		if ($event.key === "ArrowRight") {
+			this.next();
+		} else if ($event.key === "ArrowLeft") {
+			this.previous();
+		}
+	}
 }

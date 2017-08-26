@@ -1,3 +1,4 @@
+<div (window:keyup)="onKey($event)"></div>
 <ng-container *ngIf="step">
 	<ng-container *ngIf="isYoutube(step)">
 		<div class="overlay" [ngStyle]="{top: 0, left:0, width: '100%', height: '100vh', position: 'fixed'}"></div>
