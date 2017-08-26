@@ -19,7 +19,7 @@ import { TourStep } from './step/tourstep';
 })
 export class TelemachyTourComponent implements OnInit, OnDestroy {
 	private sub: Subscription;
-	private step: TourStep;
+	public step: TourStep;
 
 	constructor(private TelemachyService: TelemachyService) {}
 
