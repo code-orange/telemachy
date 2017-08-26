@@ -1,7 +1,33 @@
 <ng-container *ngIf="step">
 	<ng-container *ngIf="isYoutube(step)">
+		<div class="overlay" [ngStyle]="{top: 0, left:0, width: '100%', height: '100vh', position: 'fixed'}"></div>
+		<iframe width="853" height="480" [src]="getVideoUrl()" frameborder="0" allowfullscreen class="video"></iframe>
+		<div class="ytpopup">
+			<div class="content">
+				<div class="controls">
+					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
+					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
+					<a *ngIf="!canFinish()" (click)="skip()">skip</a>
+					<a *ngIf="canFinish()" (click)="finish()">finish</a>
+					<span>({{progress}}/{{total}})</span>
+				</div>
+			</div>
+		</div>
 	</ng-container>
 	<ng-container *ngIf="isHtml(step)">
+		<div class="overlay" [ngStyle]="{top: 0, left:0, width: '100%', height: documentHeight}"></div>
+		<div class="popup">
+			<div class="content">
+				<div [innerHtml]="step.body" class="body"></div>
+				<div class="controls">
+					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
+					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
+					<a *ngIf="!canFinish()" (click)="skip()">skip</a>
+					<a *ngIf="canFinish()" (click)="finish()">finish</a>
+					<span>({{progress}}/{{total}})</span>
+				</div>
+			</div>
+		</div>
 	</ng-container>
 	<ng-container *ngIf="isElement(step)">
 		<div class="overlay" [ngStyle]="{left: 0, top: 0, width: step.documentWidth, height: step.top}"></div>
@@ -23,11 +49,3 @@
 		</div>
 	</ng-container>
 </ng-container>
-
-<div class="debug-controls">
-	<pre *ngIf="step">{{step.constructor.name}} {{step | json}}</pre>
-	<button *ngIf="canGoBack()" (click)="previous()">Previous</button>
-	<button *ngIf="!canFinish()" (click)="next()">Next</button>
-	<button *ngIf="canFinish()" (click)="finish()">Finish</button>
-	<button (click)="skip()">Skip</button>
-</div>

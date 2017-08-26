@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from '../../../node_modules/rxjs/Subscription.d';
+import { Subscription } from '../../../node_modules/rxjs/Subscription';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { TelemachyService } from './../telemachy.service';
 import { TourStep } from './../step/tourstep';
@@ -16,7 +17,7 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 	private sub: Subscription;
 	public step: TourStep;
 
-	constructor(private TelemachyService: TelemachyService) {}
+	constructor(private TelemachyService: TelemachyService, private DomSanitizer: DomSanitizer) {}
 
 	ngOnInit() {
 		this.sub = this.TelemachyService.subscribeStep((step: TourStep) => {
@@ -63,5 +64,17 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 	}
 	public get total(): number {
 		return this.TelemachyService.total;
+	}
+
+	public get documentWidth(): string {
+		return document.body.scrollWidth + 'px';
+	}
+	public get documentHeight(): string {
+		return document.body.scrollHeight + 'px';
+	}
+
+
+	public getVideoUrl() {
+		return this.DomSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + (this.step as YoutubeTourStep).video + '?rel=0');
 	}
 }
