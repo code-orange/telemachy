@@ -1,21 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from '../../../node_modules/rxjs/Subscription.d';
 
-import { TelemachyService } from './telemachy.service';
-import { TourStep } from './step/tourstep';
+import { TelemachyService } from './../telemachy.service';
+import { TourStep } from './../step/tourstep';
+import { YoutubeTourStep } from './../step/youtube.step';
+import { HTMLTourStep } from './../step/html.step';
+import { ElementTourStep } from './../step/element.step';
 
 @Component({
 	selector: 'telemachy-tour',
-	template: `
-		<pre *ngIf="step">{{step.constructor.name}} {{step | json}}</pre>
-		<button *ngIf="canGoBack()" (click)="previous()">Previous</button>
-		<button *ngIf="!canFinish()" (click)="next()">Next</button>
-		<button *ngIf="canFinish()" (click)="finish()">Finish</button>
-		<button (click)="skip()">Skip</button>
-		`,
-	styles: [
-
-	]
+	templateUrl: './telemachy.component.html',
+	styleUrls: ['./telemachy.component.css']
 })
 export class TelemachyTourComponent implements OnInit, OnDestroy {
 	private sub: Subscription;
@@ -51,5 +46,22 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 	}
 	public previous() {
 		return this.TelemachyService.previous();
+	}
+
+	public isYoutube(step: TourStep) {
+		return step instanceof YoutubeTourStep;
+	}
+	public isHtml(step: TourStep) {
+		return step instanceof HTMLTourStep;
+	}
+	public isElement(step: TourStep) {
+		return step instanceof ElementTourStep;
+	}
+
+	public get progress(): number {
+		return this.TelemachyService.progress;
+	}
+	public get total(): number {
+		return this.TelemachyService.total;
 	}
 }

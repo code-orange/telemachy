@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { HasGuidedTour } from './hasguidedtour';
 import { TelemachyService } from './telemachy.service';
-import { TelemachyTourComponent } from './telemachy.component';
+import { TelemachyTourComponent } from './component/telemachy.component';
 
 import { TourPersistency } from './persistence/tourpersistency';
 

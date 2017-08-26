@@ -1,0 +1,33 @@
+<ng-container *ngIf="step">
+	<ng-container *ngIf="isYoutube(step)">
+	</ng-container>
+	<ng-container *ngIf="isHtml(step)">
+	</ng-container>
+	<ng-container *ngIf="isElement(step)">
+		<div class="overlay" [ngStyle]="{left: 0, top: 0, width: step.documentWidth, height: step.top}"></div>
+		<div class="overlay" [ngStyle]="{left: 0, top: step.top, width: step.left, height: step.fromTop}"></div>
+		<div class="overlay" [ngStyle]="{left: step.left, top: step.bottom, width: step.fromLeft, height: step.toBottom}"></div>
+		<div class="overlay" [ngStyle]="{left: step.right, top: step.top, width: step.toRight, height: step.height}"></div>
+
+		<div class="explanation" [ngStyle]="{left: step.left, top: step.bottom, width: (step.domElement.getBoundingClientRect().width - 2) + 'px'}">
+			<div class="content">
+				<div [innerHtml]="step.body"></div>
+				<div class="controls">
+					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
+					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
+					<a *ngIf="!canFinish()" (click)="skip()">skip</a>
+					<a *ngIf="canFinish()" (click)="finish()">finish</a>
+					<span>({{progress}}/{{total}})</span>
+				</div>
+			</div>
+		</div>
+	</ng-container>
+</ng-container>
+
+<div class="debug-controls">
+	<pre *ngIf="step">{{step.constructor.name}} {{step | json}}</pre>
+	<button *ngIf="canGoBack()" (click)="previous()">Previous</button>
+	<button *ngIf="!canFinish()" (click)="next()">Next</button>
+	<button *ngIf="canFinish()" (click)="finish()">Finish</button>
+	<button (click)="skip()">Skip</button>
+</div>

@@ -111,4 +111,11 @@ export class TelemachyService {
 	public subscribeStep(generatorOrNext?: any, error?: any, complete?: any) {
 		return this.currentTourStep.subscribe(generatorOrNext, error, complete);
 	}
+
+	public get progress(): number {
+		return this.activeStep + 1;
+	}
+	public get total(): number {
+		return this.activeTour.length;
+	}
 }
