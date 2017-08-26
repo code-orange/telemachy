@@ -13,11 +13,26 @@ export class ElementTourStep extends TourStep {
 	 */
 	public body: string;
 
-	public constructor(selector: string, body: string) {
+	public constructor(selector: string, body: string, async?: boolean) {
 		super();
 		this.domElement = window.document.querySelector(selector);
 		if (!(this.domElement instanceof Element)) {
-			throw new Error("Couldn't find the element you selected");
+			if (async) {
+				let timeout = 100;
+				var retry = () => {
+					// Give up eventually
+					if (timeout <= 2000) {
+						this.domElement = window.document.querySelector(selector);
+						if (!(this.domElement instanceof Element)) {
+							timeout *= 2;
+							setTimeout(retry, timeout);
+						}
+					}
+				};
+				setTimeout(retry, timeout);
+			} else {
+				throw new Error("Couldn't find the element you selected");
+			}
 		}
 		this.body = body;
 	}

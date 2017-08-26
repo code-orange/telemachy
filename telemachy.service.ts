@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { HasGuidedTour, componentHasGuidedTour } from './hasguidedtour';
 import { TourStep } from './step/tourstep';
+import { ElementTourStep } from './step/element.step';
 import { TourPersistency } from './persistence/tourpersistency';
 
 interface Component {
@@ -82,12 +83,30 @@ export class TelemachyService {
 	public next() {
 		if (this.activeStep < (this.activeTour.length - 1)) {
 			this.activeStep += 1;
+
+			// Workaround for broken elements, just skip ahead
+			if (this.activeTour[this.activeStep] instanceof ElementTourStep && !(this.activeTour[this.activeStep] as ElementTourStep).domElement) {
+				if (this.canFinish()) {
+					this.finish();
+				} else {
+					this.next();
+				}
+			}
 		}
 		this.emit();
 	}
 	public previous() {
 		if (this.canGoBack()) {
 			this.activeStep -= 1;
+
+			// Workaround for broken elements, just skip back or stay in the same position
+			if (this.activeTour[this.activeStep] instanceof ElementTourStep && !(this.activeTour[this.activeStep] as ElementTourStep).domElement) {
+				if (this.canGoBack()) {
+					this.previous();
+				} else {
+					this.next();
+				}
+			}
 		}
 		this.emit();
 	}
