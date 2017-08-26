@@ -17,6 +17,9 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 	private sub: Subscription;
 	public step: TourStep;
 
+	private cachedVideoId;
+	private cachedVideoResource;
+
 	constructor(private TelemachyService: TelemachyService, private DomSanitizer: DomSanitizer) {}
 
 	ngOnInit() {
@@ -75,7 +78,13 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 
 
 	public getVideoUrl() {
-		return this.DomSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + (this.step as YoutubeTourStep).video + '?rel=0');
+		let video = (this.step as YoutubeTourStep).video;
+		if (this.cachedVideoId === video) {
+			return this.cachedVideoResource;
+		}
+		this.cachedVideoId = video;
+		this.cachedVideoResource = this.DomSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video + '?rel=0');
+		return this.cachedVideoResource;
 	}
 
 	public onKey($event: KeyboardEvent) {
