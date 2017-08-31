@@ -7,6 +7,7 @@ import { TelemachyService } from './telemachy.service';
 import { TelemachyTourComponent } from './component/telemachy.component';
 
 import { TourPersistency } from './persistence/tourpersistency';
+import { LocalstorageTourPersistency, LocalstorageTourPersistencyFactory } from './persistence/localstorage';
 
 import { TourStep } from './step/tourstep';
 import { ElementTourStep } from './step/element.step';
@@ -21,4 +22,4 @@ import { YoutubeTourStep } from './step/youtube.step';
 })
 class TelemachyModule {}
 
-export { TelemachyModule, HasGuidedTour, TourPersistency, TourStep, ElementTourStep, HTMLTourStep, YoutubeTourStep, TelemachyService };
+export { TelemachyModule, HasGuidedTour, TourPersistency, LocalstorageTourPersistency, LocalstorageTourPersistencyFactory, TourStep, ElementTourStep, HTMLTourStep, YoutubeTourStep, TelemachyService };
