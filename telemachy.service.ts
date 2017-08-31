@@ -16,6 +16,7 @@ export class TelemachyService {
 	constructor(Router: Router, ActivatedRoute: ActivatedRoute, private TourPersistency: TourPersistency) {
 		Router.events.subscribe((e) => {
 			if (e instanceof NavigationEnd) {
+				this.seenComponent = null;
 				this.recurseRouteTree(ActivatedRoute.snapshot);
 			}
 		});
@@ -27,7 +28,8 @@ export class TelemachyService {
 		if (state.component) {
 			let c = (state.component as Component).prototype;
 			if (componentHasGuidedTour(c) && c.tourAutoStart && c.tourAutoStart()) {
-				this.startTour((state.component as Component).prototype as HasGuidedTour);
+				this.seenComponent = c;
+				this.startTour(c);
 			}
 		}
 		state.children.forEach(this.recurseRouteTree);
@@ -39,6 +41,19 @@ export class TelemachyService {
 
 	private currentTourStep: Subject<TourStep>;
 
+	private seenComponent: HasGuidedTour;
+
+	private startTourForComponent(component: HasGuidedTour) {
+		// Only start if we are not started
+		if (this.activeStep < 0) {
+			this.activeTour = component.getTour();
+			this.activeStep = 0;
+			this.activeComponent = component.constructor.name;
+
+			this.emit();
+		}
+	}
+
 	/**
 	 * Attempt to start the tour for a component
 	 * @param component
@@ -48,16 +63,25 @@ export class TelemachyService {
 		// We go with the first one that decides it should be loaded and ignore the rest
 		this.TourPersistency.shouldStart(component.constructor.name).first().subscribe((shouldStart) => {
 			if (shouldStart) {
-				// Only start if we are not started
-				if (this.activeStep < 0) {
-					this.activeTour = component.getTour();
-					this.activeStep = 0;
-					this.activeComponent = component.constructor.name;
-
-					this.emit();
-				}
+				this.startTourForComponent(component);
 			}
 		});
+	}
+
+	/**
+	 * Indicates if there is a tour that could be restarted
+	 *
+	 * @returns {boolean}
+	 */
+	public canRestart(): boolean {
+		return ((this.activeStep === -1) && (!!this.seenComponent));
+	}
+
+	/**
+	 * Restarts the tour for a component (no guarantee which) that is visible right now
+	 */
+	public restartTour() {
+		this.startTourForComponent(this.seenComponent);
 	}
 
 	public canGoBack(): boolean {
