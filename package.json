@@ -1,0 +1,60 @@
+{
+	"name": "telemachy",
+	"version": "0.0.1",
+	"description": "Easy guided tours for Angular apps",
+	"scripts": {
+		"clean": "rimraf bundles src/**/*.d.ts src/**/*.metadata.json src/**/*.js tests/**/*.d.ts tests/**/*.metadata.json tests/**/*.js index.d.ts index.metadata.json index.js",
+		"clean-build": "npm run clean && npm run build && npm run prepublish",
+		"prepublish": "ngc && npm run build",
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/code-orange/telemachy.git"
+	},
+	"keywords": [
+		"angular2",
+		"angular",
+		"ng2",
+		"ng",
+		"tour",
+		"guided",
+		"guide",
+		"tutorial"
+	],
+	"author": "Tim van Dalen <tim@code-orange.nl>",
+	"license": "MIT",
+	"homepage": "https://github.com/code-orange/telemachy#readme",
+	"bugs": {
+		"url": "https://github.com/code-orange/telemachy/issues"
+	},
+	"main": "bundles/telemachy.umd.js",
+	"module": "index.js",
+	"typings": "index.d.ts",
+	"peerDependencies": {
+		"@angular/core": ">=2.0.0 || >=4.0.0-beta.0"
+	},
+	"devDependencies": {
+		"@angular/common": "4.3.2",
+		"@angular/compiler": "4.3.2",
+		"@angular/compiler-cli": "4.3.2",
+		"@angular/core": "4.3.2",
+		"@angular/platform-browser": "4.3.2",
+		"@angular/router": "4.3.2",
+		"angular-2-local-storage": "1.0.1",
+		"awesome-typescript-loader": "3.0.8",
+		"loader-utils": "1.0.3",
+		"rimraf": "2.6.1",
+		"rxjs": "5.4.2",
+		"source-map-loader": "0.1.6",
+		"ts-helpers": "1.1.2",
+		"tslint": "4.5.1",
+		"tslint-loader": "3.4.3",
+		"typescript": "2.2.1",
+		"webpack": "2.2.1",
+		"zone.js": "0.7.7"
+	},
+	"dependencies": {
+		"clean-webpack-plugin": "^0.1.16"
+	}
+}

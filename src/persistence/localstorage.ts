@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
 
 import {LocalStorageService} from 'angular-2-local-storage';
 
@@ -14,9 +15,7 @@ export class LocalstorageTourPersistency extends TourPersistency {
 	}
 
 	public shouldStart(componentName:string):Observable<boolean> {
-		return super.shouldStart(componentName).map((shouldStart) => {
-			let L = this.ls;
-			let K = this.keyFor(componentName);
+		return super.shouldStart(componentName).map((shouldStart: boolean) => {
 			return shouldStart && !this.ls.get(this.keyFor(componentName));
 		});
 	}

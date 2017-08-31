@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from '../../../node_modules/rxjs/Subscription';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs/Subscription';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { TelemachyService } from './../telemachy.service';
 import { TourStep } from './../step/tourstep';
@@ -17,8 +17,8 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 	private sub: Subscription;
 	public step: TourStep;
 
-	private cachedVideoId;
-	private cachedVideoResource;
+	private cachedVideoId: string;
+	private cachedVideoResource: SafeResourceUrl;
 
 	constructor(private TelemachyService: TelemachyService, private DomSanitizer: DomSanitizer) {}
 

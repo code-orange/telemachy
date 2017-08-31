@@ -1,0 +1,8 @@
+.idea/
+node_modules/
+*.ngfactory.ts
+*.ngsummary.json
+*.d.ts
+*.metadata.json
+*.ngstyle.ts
+*.js

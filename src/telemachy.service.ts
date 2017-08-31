@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/first'
 
 import { HasGuidedTour, componentHasGuidedTour } from './hasguidedtour';
 import { TourStep } from './step/tourstep';
@@ -151,7 +153,7 @@ export class TelemachyService {
 		}
 	}
 
-	public subscribeStep(generatorOrNext?: any, error?: any, complete?: any) {
+	public subscribeStep(generatorOrNext?: any, error?: any, complete?: any): Subscription {
 		return this.currentTourStep.subscribe(generatorOrNext, error, complete);
 	}
 
