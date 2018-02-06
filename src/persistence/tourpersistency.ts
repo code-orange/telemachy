@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class TourPersistency {
@@ -16,12 +16,12 @@ export class TourPersistency {
 	public shouldStart(componentName: string): Observable<boolean> {
 		if (typeof window === 'undefined') {
 			// If we are in a server-side render, never start
-			return Observable.of(false);
+			return of(false);
 		}
 		if (window.screen.width <= 900) {
-			return Observable.of(false);
+			return of(false);
 		}
-		return Observable.of(true);
+		return of(true);
 	}
 
 	/**

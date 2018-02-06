@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/first'
+import { first } from 'rxjs/operators';
 
 import { HasGuidedTour, componentHasGuidedTour } from './hasguidedtour';
 import { TourStep } from './step/tourstep';
@@ -63,7 +63,7 @@ export class TelemachyService {
 	public startTour(component: HasGuidedTour) {
 		// Multiple components might want to get their tour started at the same time
 		// We go with the first one that decides it should be loaded and ignore the rest
-		this.TourPersistency.shouldStart(component.constructor.name).first().subscribe((shouldStart) => {
+		this.TourPersistency.shouldStart(component.constructor.name).pipe(first()).subscribe((shouldStart) => {
 			if (shouldStart) {
 				this.startTourForComponent(component);
 			}
