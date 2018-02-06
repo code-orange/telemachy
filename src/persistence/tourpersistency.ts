@@ -11,7 +11,6 @@ export class TourPersistency {
 	 * Whether a tour should be started
 	 *
 	 * @param componentName Name of the component that the user has arrived at
-	 * @returns {Observable<boolean>}
 	 */
 	public shouldStart(componentName: string): Observable<boolean> {
 		if (typeof window === 'undefined') {

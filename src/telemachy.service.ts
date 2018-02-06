@@ -72,8 +72,6 @@ export class TelemachyService {
 
 	/**
 	 * Indicates if there is a tour that could be restarted
-	 *
-	 * @returns {boolean}
 	 */
 	public canRestart(): boolean {
 		return ((this.activeStep === -1) && (!!this.seenComponent));
