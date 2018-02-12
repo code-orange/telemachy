@@ -1,4 +1,6 @@
 .idea/
+dist/
+.ng_pkg_build/
 node_modules/
 *.ngfactory.ts
 *.ngsummary.json
