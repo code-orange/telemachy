@@ -28,18 +28,19 @@ yarn add telemachy
 npm install --save telemachy
 ```
 
-Import `TelemachyModule` in your root module:
+Import `TelemachyModule` in your root module (make sure the `RouterModule` is loaded, Telemachy uses it to automatically start the tour for any compontent that a user navigates to):
 
 ```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { TelemachyModule } from 'telemachy';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
-	imports: [BrowserModule, TelemachyModule],
+	imports: [BrowserModule, RouterModule.forRoot([]), TelemachyModule],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
 })
