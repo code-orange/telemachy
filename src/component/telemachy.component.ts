@@ -94,4 +94,12 @@ export class TelemachyTourComponent implements OnInit, OnDestroy {
 			this.previous();
 		}
 	}
+	
+	public asHtmlTourStep(val: TourStep): HTMLTourStep {
+		return val as HTMLTourStep;
+	}
+
+	public asElementTourStep(val: TourStep): ElementTourStep {
+		return val as ElementTourStep;
+	}
 }
