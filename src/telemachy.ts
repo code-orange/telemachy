@@ -22,4 +22,4 @@ import { YoutubeTourStep } from './step/youtube.step';
 })
 class TelemachyModule {}
 
-export { TelemachyModule, HasGuidedTour, TourPersistency, LocalstorageTourPersistency, LocalstorageTourPersistencyFactory, TourStep, ElementTourStep, HTMLTourStep, YoutubeTourStep, TelemachyService };
+export { TelemachyModule, HasGuidedTour, TourPersistency, LocalstorageTourPersistency, LocalstorageTourPersistencyFactory, TourStep, ElementTourStep, HTMLTourStep, YoutubeTourStep, TelemachyService, TelemachyTourComponent};
