@@ -19,7 +19,7 @@
 		<div class="overlay" [ngStyle]="{top: 0, left:0, width: '100%', height: documentHeight}"></div>
 		<div class="popup">
 			<div class="content">
-				<div [innerHtml]="step.body" class="body"></div>
+				<div [innerHtml]="asHtmlTourStep(step).body" class="body"></div>
 				<div class="controls">
 					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
 					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
@@ -38,7 +38,7 @@
 
 		<div class="explanation" [ngStyle]="{left: step.left, top: step.bottom, width: (step.domElement.getBoundingClientRect().width - 2) + 'px'}">
 			<div class="content">
-				<div [innerHtml]="step.body"></div>
+				<div [innerHtml]="asElementTourStep(step).body"></div>
 				<div class="controls">
 					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
 					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
