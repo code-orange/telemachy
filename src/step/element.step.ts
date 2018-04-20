@@ -42,25 +42,25 @@ export class ElementTourStep extends TourStep {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (this.domElement.getBoundingClientRect().top + document.body.scrollTop) + 'px';
+		return (this.domElement.getBoundingClientRect().top + window.pageYOffset) + 'px';
 	}
 	get bottom(): string {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (this.domElement.getBoundingClientRect().bottom + document.body.scrollTop) + 'px';
+		return (this.domElement.getBoundingClientRect().bottom + window.pageYOffset) + 'px';
 	}
 	get left(): string {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (this.domElement.getBoundingClientRect().left + document.body.scrollLeft) + 'px';
+		return (this.domElement.getBoundingClientRect().left + window.pageXOffset) + 'px';
 	}
 	get right(): string {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (this.domElement.getBoundingClientRect().right + document.body.scrollLeft) + 'px';
+		return (this.domElement.getBoundingClientRect().right + window.pageXOffset) + 'px';
 	}
 	get documentHeight(): string {
 		return document.body.scrollHeight + 'px';
@@ -72,25 +72,25 @@ export class ElementTourStep extends TourStep {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (document.body.scrollHeight - (this.domElement.getBoundingClientRect().bottom + document.body.scrollTop)) + 'px';
+		return (document.body.scrollHeight - (this.domElement.getBoundingClientRect().bottom + window.pageYOffset)) + 'px';
 	}
 	get toRight(): string {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (document.body.scrollWidth - (this.domElement.getBoundingClientRect().right + document.body.scrollLeft)) + 'px';
+		return (document.body.scrollWidth - (this.domElement.getBoundingClientRect().right + window.pageXOffset)) + 'px';
 	}
 	get fromLeft(): string {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (document.body.scrollWidth - (this.domElement.getBoundingClientRect().left + document.body.scrollLeft)) + 'px';
+		return (document.body.scrollWidth - (this.domElement.getBoundingClientRect().left + window.pageXOffset)) + 'px';
 	}
 	get fromTop(): string {
 		if (!this.domElement) {
 			return '0';
 		}
-		return (document.body.scrollHeight - (this.domElement.getBoundingClientRect().top + document.body.scrollTop)) + 'px';
+		return (document.body.scrollHeight - (this.domElement.getBoundingClientRect().top + window.pageYOffset)) + 'px';
 	}
 	get height(): string {
 		if (!this.domElement) {
