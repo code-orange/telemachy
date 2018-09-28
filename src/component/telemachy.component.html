@@ -31,12 +31,12 @@
 		</div>
 	</ng-container>
 	<ng-container *ngIf="isElement(step)">
-		<div class="overlay" [ngStyle]="{left: 0, top: 0, width: step.documentWidth, height: step.top}"></div>
-		<div class="overlay" [ngStyle]="{left: 0, top: step.top, width: step.left, height: step.fromTop}"></div>
-		<div class="overlay" [ngStyle]="{left: step.left, top: step.bottom, width: step.fromLeft, height: step.toBottom}"></div>
-		<div class="overlay" [ngStyle]="{left: step.right, top: step.top, width: step.toRight, height: step.height}"></div>
+		<div class="overlay" [ngStyle]="{left: 0, top: 0, width: asElementTourStep(step).documentWidth, height: asElementTourStep(step).top}"></div>
+		<div class="overlay" [ngStyle]="{left: 0, top: asElementTourStep(step).top, width: asElementTourStep(step).left, height: asElementTourStep(step).fromTop}"></div>
+		<div class="overlay" [ngStyle]="{left: asElementTourStep(step).left, top: asElementTourStep(step).bottom, width: asElementTourStep(step).fromLeft, height: asElementTourStep(step).toBottom}"></div>
+		<div class="overlay" [ngStyle]="{left: asElementTourStep(step).right, top: asElementTourStep(step).top, width: asElementTourStep(step).toRight, height: asElementTourStep(step).height}"></div>
 
-		<div class="explanation" [ngStyle]="{left: step.left, top: step.bottom, width: (step.domElement.getBoundingClientRect().width - 2) + 'px'}">
+		<div class="explanation" [ngStyle]="{left: asElementTourStep(step).left, top: asElementTourStep(step).bottom, width: (asElementTourStep(step).domElement.getBoundingClientRect().width - 2) + 'px'}">
 			<div class="content">
 				<div [innerHtml]="asElementTourStep(step).body"></div>
 				<div class="controls">

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { HasGuidedTour, componentHasGuidedTour } from './hasguidedtour';

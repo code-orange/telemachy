@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {LocalStorageService} from 'angular-2-local-storage';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { TourPersistency } from './tourpersistency';
 
