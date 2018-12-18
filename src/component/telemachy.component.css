@@ -7,6 +7,7 @@
 }
 .explanation {
 	position: absolute;
+	min-width: 220px;
 	z-index: 9000000;
 	transition: all 0.25s ease;
 	border-width: 1px;
