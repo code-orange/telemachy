@@ -16,7 +16,7 @@
 		</div>
 	</ng-container>
 	<ng-container *ngIf="isHtml(step)">
-		<div class="overlay" [ngStyle]="{top: 0, left:0, width: '100%', height: documentHeight}"></div>
+		<div class="overlay" [ngStyle]="{top: 0, left:0, width: '100%', height: documentHeight, position: 'fixed'}"></div>
 		<div class="popup">
 			<div class="content">
 				<div [innerHtml]="asHtmlTourStep(step).body" class="body"></div>

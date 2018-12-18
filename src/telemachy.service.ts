@@ -62,7 +62,7 @@ export class TelemachyService {
 	public startTour(component: HasGuidedTour) {
 		// Multiple components might want to get their tour started at the same time
 		// We go with the first one that decides it should be loaded and ignore the rest
-		this.TourPersistency.shouldStart(component.constructor.name).pipe(first()).subscribe((shouldStart) => {
+		this.TourPersistency.shouldStart(component.constructor.name).pipe(first()).subscribe((shouldStart: any) => {
 			if (shouldStart) {
 				this.startTourForComponent(component);
 			}
@@ -103,6 +103,16 @@ export class TelemachyService {
 		this.TourPersistency.skip(this.activeComponent);
 		this.reset();
 	}
+	public scrollViewport(step: any) {
+		const rightBound = (window.pageXOffset + window.innerWidth) - parseInt(step.right);
+		const leftBound = parseInt(step.left) - window.pageXOffset;
+		if(rightBound < 0) {
+			window.scrollTo(parseInt(step.left), 0);
+		}
+		if(leftBound < 0) {
+			window.scrollTo(parseInt(step.left), 0);
+		}
+	}
 	public next() {
 		if (this.activeStep < (this.activeTour.length - 1)) {
 			this.activeStep += 1;
@@ -117,6 +127,8 @@ export class TelemachyService {
 			}
 		}
 		this.emit();
+		const step = this.activeTour[this.activeStep];
+		this.scrollViewport(step);
 	}
 	public previous() {
 		if (this.canGoBack()) {
@@ -132,13 +144,14 @@ export class TelemachyService {
 			}
 		}
 		this.emit();
+		const step = this.activeTour[this.activeStep];
+		this.scrollViewport(step);
 	}
 
 	private reset() {
 		this.activeTour = null;
 		this.activeStep = -1;
 		this.activeComponent = null;
-
 		this.emit();
 	}
 
