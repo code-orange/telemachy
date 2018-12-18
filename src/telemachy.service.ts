@@ -44,9 +44,13 @@ export class TelemachyService {
 
 	private seenComponent: HasGuidedTour;
 
+	private startCallback: () => void;
+	private endCallback: () => void;
+
 	private startTourForComponent(component: HasGuidedTour) {
 		// Only start if we are not started
 		if (this.activeStep < 0) {
+			this.startCallback();
 			this.activeTour = component.getTour();
 			this.activeStep = 0;
 			this.activeComponent = component.constructor.name;
@@ -153,6 +157,7 @@ export class TelemachyService {
 		this.activeStep = -1;
 		this.activeComponent = null;
 		this.emit();
+		this.endCallback();
 	}
 
 	private emit() {
@@ -172,5 +177,21 @@ export class TelemachyService {
 	}
 	public get total(): number {
 		return this.activeTour.length;
+	}
+
+	public setStartCallback(callBack: () => void): void {
+		this.startCallback = callBack;
+	}
+
+	public setEndCallback(callBack: () => void): void {
+		this.endCallback = callBack;
+	}
+
+	public deleteStartCallback(): void {
+		this.startCallback = null;
+	}
+
+	public deleteEndCallback(): void {
+		this.endCallback = null;
 	}
 }
