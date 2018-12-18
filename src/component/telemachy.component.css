@@ -23,7 +23,7 @@
 }
 
 .popup {
-	position: absolute;
+	position: fixed;
 	width: 50%;
 	left: 25%;
 	top: 35vh;
