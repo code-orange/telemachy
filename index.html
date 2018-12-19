@@ -102,6 +102,27 @@ To check if there is a currently visible component that has a tour, use <code>Te
      * Restarts the tour for a component (no guarantee which) that is visible right now
      */</span>
     restartTour(): <span class="hljs-built_in">void</span>;
+
+    <span class="hljs-comment">/**
+    * Adds an event listener that is called at either the start or end of the tour.
+    * Types are 'start' or 'end'
+    * listener can't be an anonymous function else it is not possible to remove the callback.
+    * 
+    * @param type string
+    * @param listener function
+    */</span>
+    addEventListener(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, listener:<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">void</span>): <span class="hljs-built_in">void</span>;
+
+    <span class="hljs-comment">/**
+    * Removes an event listener.
+    * Types are 'start' or 'end'
+    * listener should be the same function as the one that was added.
+    * 
+    * @param type string
+    * @param listener function
+    */</span>
+    removeEventListener(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, listener:<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">void</span>): <span class="hljs-built_in">void</span>;
+
     canGoBack(): <span class="hljs-built_in">boolean</span>;
     canFinish(): <span class="hljs-built_in">boolean</span>;
     finish(): <span class="hljs-built_in">void</span>;
@@ -180,4 +201,10 @@ To check if there is a currently visible component that has a tour, use <code>Te
     readonly width: string;
 }</pre><p>If <code>async</code> is <code>true</code>, the <code>ElementTourStep</code> will attempt to find the element on the page after it has been initialized.
 If the element isn't available by the time the step should be rendered, the step will be skipped. </p>
-</div></article></div><footer><div style="box-sizing:border-box;max-width:1024px;margin-left:auto;margin-right:auto;margin-bottom:32px;padding-top:8px;padding-bottom:8px;padding-left:32px;padding-right:32px;"><div style="margin-left:-16px;margin-right:-16px;"><a href="https://github.com/code-orange/telemachy" class="Link" style="box-sizing:border-box;color:inherit;display:inline-block;font-size:14px;line-height:16px;padding-left:16px;padding-right:16px;padding-top:16px;padding-bottom:16px;font-weight:600;text-decoration:none;">GitHub</a><a href="https://github.com/code-orange" class="Link" style="box-sizing:border-box;color:inherit;display:inline-block;font-size:14px;line-height:16px;padding-left:16px;padding-right:16px;padding-top:16px;padding-bottom:16px;font-weight:600;text-decoration:none;">code-orange</a></div><div></div></div></footer></div><div style="font-family:-apple-system, sans-serif;font-size:12px;font-weight:600;text-align:right;padding:24px;color:#333;background-color:#eee;"><a href="http://compositor.io" style="color:inherit;text-decoration:none;">Built with Compositor.io</a></div></body></html>
+<h3>Event Listeners</h3>
+<p>It is possible to add event listeners that are fired add the start of the tour 
+or at the end of the tour when the finished/skipped button is clicked. 
+Possible types: <code>start</code> or <code>end</code></p>
+<pre>    <span class="hljs-keyword">let</span> doSomething = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'something'</span>);
+    <span class="hljs-keyword">this</span>.TelemachyService.addEventListener(<span class="hljs-string">'start'</span>, doSomething);
+    <span class="hljs-keyword">this</span>.TelemachyService.removeEventListener(<span class="hljs-string">'start'</span>, doSomething);</pre></div></article></div><footer><div style="box-sizing:border-box;max-width:1024px;margin-left:auto;margin-right:auto;margin-bottom:32px;padding-top:8px;padding-bottom:8px;padding-left:32px;padding-right:32px;"><div style="margin-left:-16px;margin-right:-16px;"><a href="https://github.com/code-orange/telemachy" class="Link" style="box-sizing:border-box;color:inherit;display:inline-block;font-size:14px;line-height:16px;padding-left:16px;padding-right:16px;padding-top:16px;padding-bottom:16px;font-weight:600;text-decoration:none;">GitHub</a><a href="https://github.com/code-orange" class="Link" style="box-sizing:border-box;color:inherit;display:inline-block;font-size:14px;line-height:16px;padding-left:16px;padding-right:16px;padding-top:16px;padding-bottom:16px;font-weight:600;text-decoration:none;">code-orange</a></div><div></div></div></footer></div><div style="font-family:-apple-system, sans-serif;font-size:12px;font-weight:600;text-align:right;padding:24px;color:#333;background-color:#eee;"><a href="http://compositor.io" style="color:inherit;text-decoration:none;">Built with Compositor.io</a></div></body></html>
