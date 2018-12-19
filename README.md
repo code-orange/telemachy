@@ -143,9 +143,9 @@ class TelemachyService {
     * Types are 'start' or 'end'
     * listener can't be an anonymous function else it is not possible to remove the callback.
     * 
-	* @param type string
-	* @param listener function
-	*/
+    * @param type string
+    * @param listener function
+    */
     addEventListener(type: string, listener:() => void): void;
     
     /**
@@ -153,9 +153,9 @@ class TelemachyService {
     * Types are 'start' or 'end'
     * listener should be the same function as the one that was added.
     * 
-	* @param type string
-	* @param listener function
-	*/
+    * @param type string
+    * @param listener function
+    */
     removeEventListener(type: string, listener:() => void): void;
     
     canGoBack(): boolean;
