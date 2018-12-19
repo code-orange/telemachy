@@ -44,13 +44,13 @@ export class TelemachyService {
 
 	private seenComponent: HasGuidedTour;
 
-	private startCallback: () => void;
-	private endCallback: () => void;
+	private startEventListener: {(): void}[] = [];
+	private endEventListener: {(): void}[] = [];
 
 	private startTourForComponent(component: HasGuidedTour) {
 		// Only start if we are not started
 		if (this.activeStep < 0) {
-			this.startCallback();
+			this.startEventListener.forEach(func => func());
 			this.activeTour = component.getTour();
 			this.activeStep = 0;
 			this.activeComponent = component.constructor.name;
@@ -157,7 +157,7 @@ export class TelemachyService {
 		this.activeStep = -1;
 		this.activeComponent = null;
 		this.emit();
-		this.endCallback();
+		this.endEventListener.forEach(func => func());
 	}
 
 	private emit() {
@@ -179,19 +179,28 @@ export class TelemachyService {
 		return this.activeTour.length;
 	}
 
-	public setStartCallback(callBack: () => void): void {
-		this.startCallback = callBack;
+	public addEventListener(type: string, listener: () => void) {
+		if(type == 'start') {
+			this.startEventListener.push(listener);
+		}
+		if(type == 'end') {
+			this.endEventListener.push(listener);
+		}
 	}
 
-	public setEndCallback(callBack: () => void): void {
-		this.endCallback = callBack;
+	public removeEventListener(type: string, listener: () => void) {
+		if(type == 'start') {
+			const index = this.startEventListener.indexOf(listener);
+			this.startEventListener.splice(index, 1);
+		}
+		if(type == 'end') {
+			const index = this.endEventListener.indexOf(listener);
+			this.endEventListener.splice(index, 1);
+		}
 	}
 
-	public deleteStartCallback(): void {
-		this.startCallback = null;
-	}
-
-	public deleteEndCallback(): void {
-		this.endCallback = null;
+	public removeAllEventListeners() {
+		this.startEventListener = [];
+		this.endEventListener = [];
 	}
 }
