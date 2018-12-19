@@ -44,9 +44,13 @@ export class TelemachyService {
 
 	private seenComponent: HasGuidedTour;
 
+	private startEventListener: {(): void}[] = [];
+	private endEventListener: {(): void}[] = [];
+
 	private startTourForComponent(component: HasGuidedTour) {
 		// Only start if we are not started
 		if (this.activeStep < 0) {
+			this.startEventListener.forEach(func => func());
 			this.activeTour = component.getTour();
 			this.activeStep = 0;
 			this.activeComponent = component.constructor.name;
@@ -153,6 +157,7 @@ export class TelemachyService {
 		this.activeStep = -1;
 		this.activeComponent = null;
 		this.emit();
+		this.endEventListener.forEach(func => func());
 	}
 
 	private emit() {
@@ -172,5 +177,41 @@ export class TelemachyService {
 	}
 	public get total(): number {
 		return this.activeTour.length;
+	}
+
+	/**
+	 * Adds an event listener that is called at either the start or end of the tour.
+	 * Types are 'start' or 'end'
+	 * listener can't be an anonymous function else it is not possible to remove the callback.
+	 *
+	 * @param type string
+	 * @param listener function
+	 */
+	public addEventListener(type: string, listener: () => void) {
+		if(type == 'start') {
+			this.startEventListener.push(listener);
+		}
+		if(type == 'end') {
+			this.endEventListener.push(listener);
+		}
+	}
+
+	/**
+	 * Removes an event listener.
+	 * Types are 'start' or 'end'
+	 * listener should be the same function as the one that was added.
+	 *
+	 * @param type string
+	 * @param listener function
+	 */
+	public removeEventListener(type: string, listener: () => void) {
+		if(type == 'start') {
+			const index = this.startEventListener.indexOf(listener);
+			this.startEventListener.splice(index, 1);
+		}
+		if(type == 'end') {
+			const index = this.endEventListener.indexOf(listener);
+			this.endEventListener.splice(index, 1);
+		}
 	}
 }

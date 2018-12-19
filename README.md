@@ -137,6 +137,27 @@ class TelemachyService {
      * Restarts the tour for a component (no guarantee which) that is visible right now
      */
     restartTour(): void;
+    
+    /**
+    * Adds an event listener that is called at either the start or end of the tour.
+    * Types are 'start' or 'end'
+    * listener can't be an anonymous function else it is not possible to remove the callback.
+    * 
+	* @param type string
+	* @param listener function
+	*/
+    addEventListener(type: string, listener:() => void): void;
+    
+    /**
+    * Removes an event listener.
+    * Types are 'start' or 'end'
+    * listener should be the same function as the one that was added.
+    * 
+	* @param type string
+	* @param listener function
+	*/
+    removeEventListener(type: string, listener:() => void): void;
+    
     canGoBack(): boolean;
     canFinish(): boolean;
     finish(): void;
@@ -239,3 +260,15 @@ class ElementTourStep extends TourStep {
 
 If `async` is `true`, the `ElementTourStep` will attempt to find the element on the page after it has been initialized.
 If the element isn't available by the time the step should be rendered, the step will be skipped. 
+
+### Event Listeners
+It is possible to add event listeners that are fired add the start of the tour 
+or at the end of the tour when the finished/skipped button is clicked. 
+Possible types: `start` or `end`
+
+
+```typescript
+	let doSomething = () => console.log('something');
+	this.TelemachyService.addEventListener('start', doSomething);
+	this.TelemachyService.removeEventListener('start', doSomething);
+```
