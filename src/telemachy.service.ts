@@ -179,6 +179,14 @@ export class TelemachyService {
 		return this.activeTour.length;
 	}
 
+	/**
+	 * Adds an event listener that is called at either the start or end of the tour.
+	 * Types are 'start' or 'end'
+	 * listener can't be an anonymous function else it is not possible to remove the callback.
+	 *
+	 * @param type string
+	 * @param listener function
+	 */
 	public addEventListener(type: string, listener: () => void) {
 		if(type == 'start') {
 			this.startEventListener.push(listener);
@@ -188,6 +196,14 @@ export class TelemachyService {
 		}
 	}
 
+	/**
+	 * Removes an event listener.
+	 * Types are 'start' or 'end'
+	 * listener should be the same function as the one that was added.
+	 *
+	 * @param type string
+	 * @param listener function
+	 */
 	public removeEventListener(type: string, listener: () => void) {
 		if(type == 'start') {
 			const index = this.startEventListener.indexOf(listener);
@@ -197,10 +213,5 @@ export class TelemachyService {
 			const index = this.endEventListener.indexOf(listener);
 			this.endEventListener.splice(index, 1);
 		}
-	}
-
-	public removeAllEventListeners() {
-		this.startEventListener = [];
-		this.endEventListener = [];
 	}
 }

@@ -158,7 +158,6 @@ class TelemachyService {
 	*/
     removeEventListener(type: string, listener:() => void): void;
     
-    removeAllEventListener(): void;
     canGoBack(): boolean;
     canFinish(): boolean;
     finish(): void;
@@ -270,6 +269,6 @@ Possible types: `start` or `end`
 
 ```typescript
 	let doSomething = () => console.log('something');
-	this.TelemachyService.addEventListener('start', doSomething());
-	this.TelemachyService.removeEventListener('start', doSomething());
+	this.TelemachyService.addEventListener('start', doSomething);
+	this.TelemachyService.removeEventListener('start', doSomething);
 ```
