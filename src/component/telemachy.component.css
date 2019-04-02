@@ -7,7 +7,7 @@
 }
 .explanation {
 	position: absolute;
-	min-width: 220px;
+	min-width: 700px;
 	z-index: 9000000;
 	transition: all 0.25s ease;
 	border-width: 1px;
@@ -45,7 +45,6 @@
 	height: calc(100% - 29px);
 }
 .popup .controls {
-	position: absolute;
 	bottom: 1em;
 }
 .controls a {
@@ -79,4 +78,41 @@
 }
 .ytpopup .content {
 	padding: 1em;
+}
+
+.flex-container{
+	display: flex;
+}
+
+.step-button {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-grow: 2;
+}
+
+.step-counter {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 2;
+	padding-right: 15%;
+}
+
+.end-button {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.horizontal-line {
+	margin-top: 20px;
+	height: 2px;
+	border: none;
+	color: #333;
+	background-color: #269189;
+	text-align: center;
 }
