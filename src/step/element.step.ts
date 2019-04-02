@@ -56,6 +56,17 @@ export class ElementTourStep extends TourStep {
 		}
 		return (this.domElement.getBoundingClientRect().left + window.pageXOffset) + 'px';
 	}
+	get leftContent(): string {
+		if (!this.domElement) {
+			return '0';
+		}
+
+		if (((this.domElement.getBoundingClientRect().left + window.pageXOffset) - window.innerWidth) >= -700) {
+			return ((window.innerWidth - 720) + 'px');
+		}
+		console.log(((this.domElement.getBoundingClientRect().left + window.pageXOffset) - window.innerWidth));
+		return (this.domElement.getBoundingClientRect().left + window.pageXOffset) + 'px';
+	}
 	get right(): string {
 		if (!this.domElement) {
 			return '0';

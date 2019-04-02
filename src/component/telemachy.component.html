@@ -41,7 +41,7 @@
 		<div class="overlay" [ngStyle]="{left: asElementTourStep(step).left, top: asElementTourStep(step).bottom, width: asElementTourStep(step).fromLeft, height: asElementTourStep(step).toBottom}"></div>
 		<div class="overlay" [ngStyle]="{left: asElementTourStep(step).right, top: asElementTourStep(step).top, width: asElementTourStep(step).toRight, height: asElementTourStep(step).height}"></div>
 
-		<div class="explanation" [ngStyle]="{left: asElementTourStep(step).left, top: asElementTourStep(step).bottom, width: (asElementTourStep(step).domElement.getBoundingClientRect().width - 2) + 'px'}">
+		<div class="explanation" [ngStyle]="{left: asElementTourStep(step).leftContent, top: asElementTourStep(step).bottom, width: (asElementTourStep(step).domElement.getBoundingClientRect().width - 2) + 'px'}">
 			<div class="content">
 				<div [innerHtml]="asElementTourStep(step).body"></div>
 				<hr class="horizontal-line"/>
