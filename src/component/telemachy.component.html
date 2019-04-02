@@ -6,8 +6,10 @@
 		<div class="ytpopup">
 			<div class="content">
 				<div class="controls flex-container">
-					<a *ngIf="canGoBack()" (click)="previous()" class="step-button"><< Prev</a>
-					<a *ngIf="!canFinish()" (click)="next()" class="step-button">Next >></a>
+					<div class="step-button">
+						<a *ngIf="canGoBack()" (click)="previous()"><< Prev</a>
+						<a *ngIf="!canFinish()" (click)="next()">Next >></a>
+					</div>
 					<span class="step-counter">({{progress}}/{{total}})</span>
 					<a *ngIf="!canFinish()" (click)="skip()" class="end-button">End tour</a>
 					<a *ngIf="canFinish()" (click)="finish()" class="end-button">finish</a>
