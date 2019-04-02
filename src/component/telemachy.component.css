@@ -1,7 +1,7 @@
 .overlay {
 	position: absolute;
 	background: rgba(0, 0, 0, 0.5);
-	pointer-events: none;
+	/*pointer-events: none;*/
 	z-index: 9000000;
 	transition: all 0.25s ease;
 }
