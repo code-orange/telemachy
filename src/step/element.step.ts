@@ -56,17 +56,6 @@ export class ElementTourStep extends TourStep {
 		}
 		return (this.domElement.getBoundingClientRect().left + window.pageXOffset) + 'px';
 	}
-	get leftContent(): string {
-		if (!this.domElement) {
-			return '0';
-		}
-
-		if (((this.domElement.getBoundingClientRect().left + window.pageXOffset) - window.innerWidth) >= -700) {
-			return ((window.innerWidth - 720) + 'px');
-		}
-		console.log(((this.domElement.getBoundingClientRect().left + window.pageXOffset) - window.innerWidth));
-		return (this.domElement.getBoundingClientRect().left + window.pageXOffset) + 'px';
-	}
 	get right(): string {
 		if (!this.domElement) {
 			return '0';
@@ -114,6 +103,32 @@ export class ElementTourStep extends TourStep {
 			return '0';
 		}
 		return this.domElement.getBoundingClientRect().width + 'px';
+	}
+
+	get leftSide(): boolean {
+		if (this.domElement.getBoundingClientRect().left <= (document.body.scrollWidth / 2)) {
+			return true;
+		}
+	}
+
+	get rightSide(): boolean {
+		if (this.domElement.getBoundingClientRect().left >= (document.body.scrollWidth / 2)) {
+			console.log(this.domElement.getBoundingClientRect().right);
+			return true;
+		}
+	}
+	get style(): object {
+		let styles: any = {
+			top: this.domElement.getBoundingClientRect().bottom + 'px',
+			width: (this.domElement.getBoundingClientRect().width - 2) + 'px'
+		};
+		if (this.rightSide) {
+			styles.right = (document.body.scrollWidth - this.domElement.getBoundingClientRect().right) + 'px';
+		}
+		if (this.leftSide) {
+			styles.left = this.domElement.getBoundingClientRect().left + 'px';
+		}
+		return styles;
 	}
 	//endregion
 }
