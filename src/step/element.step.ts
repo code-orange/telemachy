@@ -64,7 +64,6 @@ export class ElementTourStep extends TourStep {
 		if (((this.domElement.getBoundingClientRect().left + window.pageXOffset) - window.innerWidth) >= -700) {
 			return ((window.innerWidth - 720) + 'px');
 		}
-		console.log(((this.domElement.getBoundingClientRect().left + window.pageXOffset) - window.innerWidth));
 		return (this.domElement.getBoundingClientRect().left + window.pageXOffset) + 'px';
 	}
 	get right(): string {
