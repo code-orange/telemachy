@@ -104,28 +104,15 @@ export class ElementTourStep extends TourStep {
 		}
 		return this.domElement.getBoundingClientRect().width + 'px';
 	}
-
-	get leftSide(): boolean {
-		if (this.domElement.getBoundingClientRect().left <= (document.body.scrollWidth / 2)) {
-			return true;
-		}
-	}
-
-	get rightSide(): boolean {
-		if (this.domElement.getBoundingClientRect().left >= (document.body.scrollWidth / 2)) {
-			console.log(this.domElement.getBoundingClientRect().right);
-			return true;
-		}
-	}
 	get style(): object {
 		let styles: any = {
 			top: this.domElement.getBoundingClientRect().bottom + 'px',
 			width: (this.domElement.getBoundingClientRect().width - 2) + 'px'
 		};
-		if (this.rightSide) {
+		if (this.domElement.getBoundingClientRect().left >= (document.body.scrollWidth / 2)) {
 			styles.right = (document.body.scrollWidth - this.domElement.getBoundingClientRect().right) + 'px';
 		}
-		if (this.leftSide) {
+		if (this.domElement.getBoundingClientRect().left <= (document.body.scrollWidth / 2)) {
 			styles.left = this.domElement.getBoundingClientRect().left + 'px';
 		}
 		return styles;
