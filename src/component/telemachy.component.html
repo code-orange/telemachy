@@ -5,12 +5,14 @@
 		<iframe width="853" height="480" [src]="getVideoUrl()" frameborder="0" allowfullscreen class="video"></iframe>
 		<div class="ytpopup">
 			<div class="content">
-				<div class="controls">
-					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
-					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
-					<a *ngIf="!canFinish()" (click)="skip()">skip</a>
-					<a *ngIf="canFinish()" (click)="finish()">finish</a>
-					<span>({{progress}}/{{total}})</span>
+				<div class="controls flex-container">
+					<div class="step-button">
+						<a *ngIf="canGoBack()" (click)="previous()"><< Prev</a>
+						<a *ngIf="!canFinish()" (click)="next()">Next >></a>
+					</div>
+					<span class="step-counter">({{progress}}/{{total}})</span>
+					<a *ngIf="!canFinish()" (click)="skip()" class="end-button">End tour</a>
+					<a *ngIf="canFinish()" (click)="finish()" class="end-button">finish</a>
 				</div>
 			</div>
 		</div>
@@ -20,12 +22,15 @@
 		<div class="popup">
 			<div class="content">
 				<div [innerHtml]="asHtmlTourStep(step).body" class="body"></div>
-				<div class="controls">
-					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
-					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
-					<a *ngIf="!canFinish()" (click)="skip()">skip</a>
-					<a *ngIf="canFinish()" (click)="finish()">finish</a>
-					<span>({{progress}}/{{total}})</span>
+				<hr class="horizontal-line"/>
+				<div class="controls flex-container">
+					<div class="step-button">
+						<a *ngIf="canGoBack()" (click)="previous()"><< Prev</a>
+						<a *ngIf="!canFinish()" (click)="next()">Next >></a>
+					</div>
+					<span class="step-counter">({{progress}}/{{total}})</span>
+					<a *ngIf="!canFinish()" (click)="skip()" class="end-button">End tour</a>
+					<a *ngIf="canFinish()" (click)="finish()" class="end-button">finish</a>
 				</div>
 			</div>
 		</div>
@@ -35,16 +40,18 @@
 		<div class="overlay" [ngStyle]="{left: 0, top: asElementTourStep(step).top, width: asElementTourStep(step).left, height: asElementTourStep(step).fromTop}"></div>
 		<div class="overlay" [ngStyle]="{left: asElementTourStep(step).left, top: asElementTourStep(step).bottom, width: asElementTourStep(step).fromLeft, height: asElementTourStep(step).toBottom}"></div>
 		<div class="overlay" [ngStyle]="{left: asElementTourStep(step).right, top: asElementTourStep(step).top, width: asElementTourStep(step).toRight, height: asElementTourStep(step).height}"></div>
-
-		<div class="explanation" [ngStyle]="{left: asElementTourStep(step).left, top: asElementTourStep(step).bottom, width: (asElementTourStep(step).domElement.getBoundingClientRect().width - 2) + 'px'}">
+		<div class="explanation" [ngStyle]="asElementTourStep(step).style">
 			<div class="content">
 				<div [innerHtml]="asElementTourStep(step).body"></div>
-				<div class="controls">
-					<a *ngIf="canGoBack()" (click)="previous()">&larr;</a>
-					<a *ngIf="!canFinish()" (click)="next()">&rarr;</a>
-					<a *ngIf="!canFinish()" (click)="skip()">skip</a>
-					<a *ngIf="canFinish()" (click)="finish()">finish</a>
-					<span>({{progress}}/{{total}})</span>
+				<hr class="horizontal-line"/>
+				<div class="controls flex-container">
+					<div class="step-button">
+						<a *ngIf="canGoBack()" (click)="previous()"><< Prev</a>
+						<a *ngIf="!canFinish()" (click)="next()">Next >></a>
+					</div>
+					<span class="step-counter">({{progress}}/{{total}})</span>
+					<a *ngIf="!canFinish()" (click)="skip()" class="end-button">End tour</a>
+					<a *ngIf="canFinish()" (click)="finish()" class="end-button">finish</a>
 				</div>
 			</div>
 		</div>
