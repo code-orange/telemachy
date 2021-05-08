@@ -38,7 +38,7 @@
 		"@angular/core": "^6.1.8",
 		"@angular/platform-browser": "^6.1.8",
 		"@angular/router": "^6.1.8",
-		"ng-packagr": "^4.2.0",
+		"ng-packagr": "^10.1.1",
 		"postcss-discard-comments": "^2.0.4",
 		"rimraf": "2.6.1",
 		"rxjs": "6.0",
