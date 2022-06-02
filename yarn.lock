@@ -23,11 +23,11 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@^6.1.8":
-  version "6.1.9"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.1.9.tgz#a21a35de551c95f276ecbb1f314949cc69326950"
+"@angular/core@^11.0.5":
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-11.0.5.tgz#b8c448c3cd4f6dae7327cc1ba4ee2aa29c8dbc26"
   dependencies:
-    tslib "^1.9.0"
+    tslib "^2.0.0"
 
 "@angular/platform-browser@^6.1.8":
   version "6.1.9"
@@ -2806,6 +2806,10 @@ tsickle@^0.32.1:
 tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+
+tslib@^2.0.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
 
 tslint@4.5.1:
   version "4.5.1"
